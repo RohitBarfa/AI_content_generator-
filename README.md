@@ -1,4 +1,6 @@
-# Chat AI App
+# AI_content_generator-
+>>>>>>> 79ecb5c27014f524a19e4a82bdcc026587584c99
+# AI Content Generator - Chat AI App
 
 A modern AI-powered chat application built with **Stream Chat**, **OpenAI**, and **web search capabilities**. This full-stack application provides an intelligent writing assistant that can help with content creation, research, and real-time collaboration.
 
@@ -43,8 +45,8 @@ A modern AI-powered chat application built with **Stream Chat**, **OpenAI**, and
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd chat-ai-app
+git clone https://github.com/RohitBarfa/AI_content_generator-.git
+cd AI_content_generator-
 ```
 
 ### 2. Backend Setup
@@ -322,3 +324,6 @@ For support and questions:
 ---
 
 Built with ❤️ using GetStream.io, OpenAI, and modern web technologies.
+=======
+# AI_content_generator-
+>>>>>>> 79ecb5c27014f524a19e4a82bdcc026587584c99
