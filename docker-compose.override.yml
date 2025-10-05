@@ -1,0 +1,42 @@
+# docker-compose.override.yml
+# This file is automatically used by docker-compose for development overrides
+# Use this for local development with live reload
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      target: builder # Use the builder stage for dev
+    environment:
+      - NODE_ENV=development
+      - USE_MOCKS=true
+    volumes:
+      - ./nodejs-ai-assistant/src:/app/src:ro
+      - ./nodejs-ai-assistant/package.json:/app/package.json:ro
+      - ./nodejs-ai-assistant/tsconfig.json:/app/tsconfig.json:ro
+      - backend_node_modules:/app/node_modules
+    command: [ "npm", "run", "dev" ]
+    ports:
+      - "3000:3000"
+      - "9229:9229" # Debug port
+
+  frontend:
+    build:
+      target: builder # Use the builder stage for dev
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./react-stream-ai-assistant/src:/app/src:ro
+      - ./react-stream-ai-assistant/public:/app/public:ro
+      - ./react-stream-ai-assistant/package.json:/app/package.json:ro
+      - ./react-stream-ai-assistant/vite.config.ts:/app/vite.config.ts:ro
+      - ./react-stream-ai-assistant/tsconfig.json:/app/tsconfig.json:ro
+      - frontend_node_modules:/app/node_modules
+    command: [ "npm", "run", "dev", "--", "--host", "0.0.0.0" ]
+    ports:
+      - "5173:5173"
+
+volumes:
+  backend_node_modules:
+  frontend_node_modules:

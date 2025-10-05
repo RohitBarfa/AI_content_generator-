@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./nodejs-ai-assistant
+      dockerfile: Dockerfile
+    container_name: ai-chat-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./nodejs-ai-assistant/.env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - ai-chat-network
+    healthcheck:
+      test: [ "CMD", "node", "-e", "http.get('http://localhost:3000/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on: []
+
+  frontend:
+    build:
+      context: ./react-stream-ai-assistant
+      dockerfile: Dockerfile
+    container_name: ai-chat-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    env_file:
+      - ./react-stream-ai-assistant/.env
+    environment:
+      - NODE_ENV=production
+    networks:
+      - ai-chat-network
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      - backend
+
+networks:
+  ai-chat-network:
+    driver: bridge
+
+volumes:
+  backend_node_modules:
+  frontend_node_modules:
