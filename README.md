@@ -1,5 +1,3 @@
-# AI_content_generator-
->>>>>>> 79ecb5c27014f524a19e4a82bdcc026587584c99
 # AI Content Generator - Chat AI App
 
 A modern AI-powered chat application built with **Stream Chat**, **OpenAI**, and **web search capabilities**. This full-stack application provides an intelligent writing assistant that can help with content creation, research, and real-time collaboration.
